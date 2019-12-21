@@ -2,3 +2,13 @@
 
 <%= link_to "新增食譜", new_recipe_path %>
 
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li>
+      <%= link_to recipe.title, recipe_path(recipe) %>
+      <%= link_to "修改", edit_recipe_path(recipe) %>
+      <%= link_to "刪除", recipe_path(recipe), method: 'delete' %>
+    </li>
+  <% end %>
+</ul>
+

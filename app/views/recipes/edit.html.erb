@@ -1,0 +1,24 @@
+<h1>編輯食譜</h1>
+
+<% if @recipe.errors.any? %>
+  <ul>
+  <% @recipe.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_for(@recipe) do |form| %>
+  <div class="field">
+    <%= form.label :title, '標題' %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, '說明' %>
+    <%= form.text_area :description %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
+
