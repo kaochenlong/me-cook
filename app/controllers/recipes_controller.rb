@@ -1,15 +1,12 @@
 class RecipesController < ApplicationController
 
+  before_action :find_recipe, only: [:show, :edit, :update, :destroy]
+
   def index
     @recipes = Recipe.all
   end
 
   def show
-    begin
-      @recipe = Recipe.find(params[:id])
-    rescue
-      render file: 'public/404.html'
-    end
   end
 
   def new
@@ -17,50 +14,38 @@ class RecipesController < ApplicationController
   end
 
   def create
-    # Strong Parameter
-    clean_params = params.require(:recipe).permit(:title, :description)
-    @recipe = Recipe.new(clean_params)
+    @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      redirect_to "/"
+      redirect_to root_path, notice: '新增成功'
     else
-      render :new   # app/views/recipes/new.html.erb
+      render :new
     end
   end
 
   def edit
-    begin
-      @recipe = Recipe.find(params[:id])
-    rescue
-      render file: 'public/404.html'
-    end
   end
 
   def update
-    clean_params = params.require(:recipe).permit(:title, :description)
-
-    begin
-      @recipe = Recipe.find(params[:id])
-
-      if @recipe.update(clean_params)
-        redirect_to root_path
-      else
-        render :edit
-      end
-
-    rescue
-      render file: 'public/404.html'
+    if @recipe.update(recipe_params)
+      redirect_to root_path, notic: '食譜已更新'
+    else
+      render :edit
     end
   end
 
   def destroy
-    begin
-      @recipe = Recipe.find(params[:id])
-      @recipe.destroy
-      redirect_to root_path
-    rescue
-      render file: 'public/404.html'
-    end
+    @recipe.destroy
+    redirect_to root_path, notice: '資料已刪除'
+  end
+
+  private
+  def recipe_params
+    params.require(:recipe).permit(:title, :description)
+  end
+
+  def find_recipe
+    @recipe = Recipe.find(params[:id])
   end
 end
 

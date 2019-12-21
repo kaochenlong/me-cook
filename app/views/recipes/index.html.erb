@@ -7,7 +7,10 @@
     <li>
       <%= link_to recipe.title, recipe_path(recipe) %>
       <%= link_to "修改", edit_recipe_path(recipe) %>
-      <%= link_to "刪除", recipe_path(recipe), method: 'delete' %>
+      <%= link_to "刪除", recipe_path(recipe), 
+                          method: 'delete', 
+                          data: { confirm: '確定嗎' }
+      %>
     </li>
   <% end %>
 </ul>
