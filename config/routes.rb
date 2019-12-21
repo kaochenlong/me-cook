@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  get "/", to: "welcome#home"
+  root "welcome#home"
+  resources :recipes
 end
 
