@@ -17,6 +17,11 @@
 
     <div class="content">
       <%= recipe.description %>
+
+      <% if user_signed_in? %>
+      <hr>
+      更新 / 刪除
+      <% end %>
     </div>
   </div>
 </div>

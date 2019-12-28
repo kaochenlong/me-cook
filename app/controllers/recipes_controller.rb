@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController 
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @recipes = Recipe.all
@@ -14,6 +15,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user_id = current_user.id
 
     if @recipe.save
       redirect_to root_path, notice: '新增成功'
