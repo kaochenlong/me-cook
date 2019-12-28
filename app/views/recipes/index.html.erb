@@ -1,17 +1,10 @@
-<h1 class="title">食譜列表</h1>
-
 <%= link_to "新增食譜", new_recipe_path, class: 'button is-danger' %>
 
-<ul>
+<div class="columns is-multiline">
   <% @recipes.each do |recipe| %>
-    <li>
-      <%= link_to recipe.title, recipe_path(recipe) %>
-      <%= link_to "修改", edit_recipe_path(recipe) %>
-      <%= link_to "刪除", recipe_path(recipe), 
-                          method: 'delete', 
-                          data: { confirm: '確定嗎' }
-      %>
-    </li>
+    <div class="column is-3">
+      <%= render 'recipe', recipe: recipe %>
+    </div>
   <% end %>
-</ul>
+</div>
 
