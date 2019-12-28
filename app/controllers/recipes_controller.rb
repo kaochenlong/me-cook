@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController 
-  before_action :find_recipe, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :find_recipe, only: [:edit, :update, :destroy]
 
   def index
     @recipes = Recipe.all
@@ -8,6 +8,11 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+  end
+
+  def my
+    @recipes = current_user.recipes
+    render :index
   end
 
   def new
