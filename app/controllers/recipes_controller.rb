@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController 
-  before_action :find_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :find_recipe, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @recipe = Recipe.find(params[:id])
   end
 
   def new
@@ -14,8 +15,10 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
-    @recipe.user_id = current_user.id
+    # @recipe = Recipe.new(recipe_params)
+    # @recipe.user = current_user
+
+    @recipe = current_user.recipes.new(recipe_params)
 
     if @recipe.save
       redirect_to root_path, notice: '新增成功'
@@ -46,7 +49,7 @@ class RecipesController < ApplicationController
   end
 
   def find_recipe
-    @recipe = Recipe.find(params[:id])
+    @recipe = current_user.recipes.find(params[:id])
   end
 end
 

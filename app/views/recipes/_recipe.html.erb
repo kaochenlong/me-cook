@@ -18,9 +18,10 @@
     <div class="content">
       <%= recipe.description %>
 
-      <% if user_signed_in? %>
-      <hr>
-      更新 / 刪除
+      <% if user_signed_in? && recipe.user == current_user %>
+        <hr>
+        <%= link_to "更新", edit_recipe_path(recipe), class: 'button is-small is-primary' %>
+        <%= link_to "刪除", recipe_path(recipe), method: 'delete', class: 'button is-small is-danger', data: { confirm: '確認刪除?'} %>
       <% end %>
     </div>
   </div>
