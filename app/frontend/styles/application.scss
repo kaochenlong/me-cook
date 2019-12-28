@@ -3,6 +3,16 @@ body {
   padding-right: 1rem;
 }
 
+.card {
+  .card-image {
+    figure {
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+}
+
 .field_with_errors {
   display: inline-block;
 }
