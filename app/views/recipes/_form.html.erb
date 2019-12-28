@@ -7,6 +7,14 @@
 <% end %>
 
 <%= form_for(recipe) do |form| %>
+
+  <%= image_tag @recipe.photo.variant(resize: "500x500") if @recipe.photo.attached? %>
+
+  <div class="field">
+    <%= form.label :photo, '照片' %>
+    <%= form.file_field :photo %>
+  </div>
+
   <div class="field">
     <%= form.label :title, '標題' %>
     <%= form.text_field :title %>
