@@ -13,6 +13,12 @@ Rails.application.routes.draw do
       get :my     # /recipes/my  my_recipes_path
     end
   end
+
+  resource :cart, only: [:show, :destroy] do
+    collection do
+      post :add, path: '/add/:id'
+    end
+  end
 end
 
 

@@ -12,6 +12,8 @@
     <div class="media">
       <div class="media-content">
         <p class="title is-4"><%= recipe.title %></p>
+        <p>(NT.<%= recipe.price %>)</p>
+        <%= link_to "加入購物車", add_cart_path(recipe), method: 'post', class: 'button is-small is-danger' %>
       </div>
     </div>
 

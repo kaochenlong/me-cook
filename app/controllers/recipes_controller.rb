@@ -50,7 +50,7 @@ class RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:title, :description, :photo)
+    params.require(:recipe).permit(:title, :description, :photo, :price)
   end
 
   def find_recipe
