@@ -16,12 +16,21 @@ RSpec.describe Cart, type: :model do
       2.times { cart.add_item(3) }
       5.times { cart.add_item(2) }
 
-      p cart
       expect(cart.items.count).to be 3
+    end
+
+    it "商品可以放到購物車裡，也可以再拿出來" do
+      cart = Cart.new
+      r1 = create(:recipe)
+      r2 = create(:recipe)
+
+      3.times { cart.add_item(r1.id) }
+      2.times { cart.add_item(r2.id) }
+
+      expect(cart.items.first.product).to be_a Recipe
     end
   end
 end
 
-# 商品可以放到購物車裡，也可以再拿出來。
 # 每個 Cart Item 都可以計算它自己的金額（小計）。
 # 可以計算整台購物車的總消費金額。

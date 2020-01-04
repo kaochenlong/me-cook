@@ -9,5 +9,9 @@ class CartItem
   def increment!(n = 1)
     @quantity = @quantity + n
   end
+
+  def product
+    Recipe.find_by(id: @product_id)
+  end
 end
 
