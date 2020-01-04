@@ -1,0 +1,27 @@
+<h1 class="title">購物車</h1>
+
+<%= link_to "清空購物車", cart_path, method: 'delete', class: 'button is-small is-success' %>
+
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>商品名稱</th>
+      <th>單價</th>
+      <th>數量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_cart.items.each do |item| %>
+    <tr>
+      <td><%= item.product.title %></td>
+      <td><%= item.product.price %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.total_price %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "繼續選購", root_path, class: 'button is-light is-medium' %>
+<%= link_to "結帳", '#', class: 'button is-danger is-medium' %>
