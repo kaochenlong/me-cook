@@ -13,5 +13,9 @@ class CartItem
   def product
     Recipe.find_by(id: @product_id)
   end
+
+  def total_price
+    product.price * @quantity
+  end
 end
 

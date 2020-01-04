@@ -29,8 +29,19 @@ RSpec.describe Cart, type: :model do
 
       expect(cart.items.first.product).to be_a Recipe
     end
+    
+    it "每個 Cart Item 都可以計算它自己的金額（小計）" do
+      cart = Cart.new
+      r1 = create(:recipe, price: 10)
+      r2 = create(:recipe, price: 20)
+
+      3.times { cart.add_item(r1.id) }
+      2.times { cart.add_item(r2.id) }
+
+      expect(cart.items.first.total_price).to be 30
+      expect(cart.items.last.total_price).to be 40
+    end
   end
 end
 
-# 每個 Cart Item 都可以計算它自己的金額（小計）。
 # 可以計算整台購物車的總消費金額。
